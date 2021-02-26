@@ -6,7 +6,7 @@
         "uncompress" : false
     },
     "uploader" : {
-        "parser" : "parser:gnomad_exome",
+        "parser" : "parser:load_gnomad_exome",
         "on_duplicates" : "error"
     }
 }

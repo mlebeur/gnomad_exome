@@ -11,7 +11,7 @@ def load_gnomad_exome(data_folder):
         reader = csv.reader(fp, delimiter='\t')
         header = next(reader)
         for line in fp:
-            rec = dict(zip(header,line))
+            rec = dict(zip(header,line.split('\t'))
             var = rec["release"] + "_" + str(rec["chromosome"]) + "_" + str(rec["position"]) + "_" + rec["reference"] + "_" + rec["alternative"]       
             _id = hashlib.sha224(var.encode('ascii')).hexdigest()       
             process_key = lambda k: k.replace(" ","_").lower()
@@ -20,6 +20,6 @@ def load_gnomad_exome(data_folder):
             results = {}
             results.setdefault(_id,[]).append(rec)
             for _id,docs in results.items():
-                doc = {"_id": _id, "thousandgenomes" : docs}
+                doc = {"_id": _id, "gnomad_exome" : docs}
                 yield doc
         

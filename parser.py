@@ -17,7 +17,8 @@ def load_gnomad_exome(data_folder):
             process_key = lambda k: k.replace(" ","_").lower()
             rec = dict_convert(rec,keyfn=process_key)
             rec = dict_sweep(rec,vals=[np.nan])
-            doc = {"_id": _id, "gnomad_exome" : rec}
-            yield doc
-
+            results.setdefault(_id,[]).append(rec)
+            for _id,docs in results.items():
+                doc = {"_id": _id, "thousandgenomes" : docs}
+                yield doc
         

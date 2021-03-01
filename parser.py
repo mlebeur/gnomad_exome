@@ -8,7 +8,7 @@ def load_gnomad_exome(data_folder):
     infile = os.path.abspath("/opt/biothings/GRCh37/gnomAD_exomes/r2.1/GnomadExomes.tsv")
     assert os.path.exists(infile)
     with open(infile) as fp:
-        reader = csv.reader(fp)
+        reader = csv.reader(fp, delimiter='\t')
         header = next(reader)
         for line in fp:
             rec = dict(zip(header,line))

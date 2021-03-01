@@ -5,6 +5,7 @@ from biothings.utils.dataload import dict_convert, dict_sweep
 from biothings import config
 logging = config.logger
 def load_gnomad_exome(data_folder):
+    results = {}
     infile = os.path.abspath("/opt/biothings/GRCh37/gnomAD_exomes/r2.1/GnomadExomes.tsv")
     assert os.path.exists(infile)
     with open(infile) as fp:

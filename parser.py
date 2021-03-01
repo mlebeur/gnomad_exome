@@ -5,7 +5,6 @@ from biothings.utils.dataload import dict_convert, dict_sweep
 from biothings import config
 logging = config.logger
 def load_gnomad_exome(data_folder):
-    results = {}
     infile = os.path.abspath("/opt/biothings/GRCh37/gnomAD_exomes/r2.1/GnomadExomes.tsv")
     assert os.path.exists(infile)
     with open(infile) as fp:
@@ -18,6 +17,7 @@ def load_gnomad_exome(data_folder):
             process_key = lambda k: k.replace(" ","_").lower()
             rec = dict_convert(rec,keyfn=process_key)
             rec = dict_sweep(rec,vals=[np.nan])
+            results = {}
             results.setdefault(_id,[]).append(rec)
             for _id,docs in results.items():
                 doc = {"_id": _id, "thousandgenomes" : docs}

@@ -10,7 +10,7 @@ def load_gnomad_exome(data_folder):
     results = {}
     with open(infile) as fp:
         reader = csv.reader(fp)
-        header = reader.next
+        header = reader.next()
         for line in fp:
             rec = dict(zip(header,line))
             var = rec["release"] + "_" + str(rec["chromosome"]) + "_" + str(rec["position"]) + "_" + rec["reference"] + "_" + rec["alternative"]       
